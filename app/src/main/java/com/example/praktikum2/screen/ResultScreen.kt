@@ -16,32 +16,49 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.praktikum2.navigation.Screen
 
+// Halaman hasil yang menerima input nama dari HomeScreen
 @Composable
 fun ResultScreen(name: String, navController: NavController) {
-
+    // Box untuk menempatkan isi di tengah layar
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
-    ){
+    ) {
+        // Kolom berisi salam dan tombol kembali
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = "Halo, $name!",
-                style = MaterialTheme.typography.headlineMedium)
+            // Teks sapaan dengan gaya headline
+            Text(
+                text = "Halo, $name!",
+                style = MaterialTheme.typography.headlineMedium
+            )
 
+            Button(
+                onClick = {
+                    navController.navigate(route = Screen.Notes.route)
+                },
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                Text("Lihat Daftar Catatan")
+            }
+
+            // Tombol untuk kembali ke halaman Home
             Button(onClick = {
                 navController.navigate(route = Screen.Home.route)
             }) {
                 Text("Kembali")
             }
+
+
         }
     }
-
 }
 
+// Preview halaman ResultScreen di Android Studio
 @Composable
 @Preview(showBackground = true)
 fun ResultPreview() {
     ResultScreen(
         name = "",
-        navController = rememberNavController()
+        navController = rememberNavController() // Controller dummy untuk preview
     )
 }
